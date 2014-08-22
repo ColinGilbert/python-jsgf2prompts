@@ -1,0 +1,21 @@
+#JSGF V1.0;
+
+grammar blender;
+
+<digit> = ONE | TWO | THREE | FOUR | FIVE | SIX | SEVEN | EIGHT | NINE ;
+
+<layer> = ONE | TWO | THREE | FOUR | FIVE | SIX | SEVEN | EIGHT | NINE | TEN | ELEVEN | TWELVE | THIRTEEN | FOURTEEN | FIFTEEN | SIXTEEN | SEVENTEEN | EIGHTEEN | NINETEEN | TWENTY ;
+
+<axis> = X | Y | Z ;
+
+<movements> = TRANSLATE | ROTATE | EXTRUDE | DUPLICATE | MOVE ;
+
+<modes> = OBJECT | EDIT | SCULPT | FACE | VERTEX | WIREFRAME ;
+
+<zooms> = IN | OUT ;
+
+<selects> = BOX | CIRCLE ;
+
+<singlecmds> = UNDO | REDO | DELETE | SUBDIVIDE ;
+
+public <command> = <movements> <axis> <digit> [ POINT <digit>+ ] | <modes> MODE | [ MOVE TO ] LAYER <layer> | <selects> SELECT | ZOOM <zooms> |  <singlecmds> ;
