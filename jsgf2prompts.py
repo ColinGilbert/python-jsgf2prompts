@@ -16,8 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 from ply import yacc
-
 from jsgflexer import tokens, lexer
 
     
@@ -129,12 +129,28 @@ if __name__ == "__main__":
         except EOFError:
             exit("File not found "+ f)
         try:
-            outfile = open('prompts', 'w')
+            tmpfile = open('tmp', 'w')
             result = parser.parse(s)
             for r in get_sentences(result,startrule):
-                outfile.write('<sil> ')
-                outfile.write(" ".join(r))
-                outfile.write(' </sil>\n')
+                tmpfile.write('<s> ')
+                tmpfile.write(' '.join(r))
+                tmpfile.write(' </s> \n')
+            tmpfile.close()
+            tmpfile = open('tmp', 'r')
+            outfile = open('prompts.txt', 'w')
+            outfile2 = open('fileids.txt', 'w')
+
+            for line_cnt,each_line in enumerate(tmpfile):
+                outfile.write(each_line.rstrip()+' (prompts_'+str(line_cnt+1)+')\n')
+                outfile2.write('(prompts_%d)\n'%(line_cnt+1))
+            try: # Cleanup routine
+                os.remove('tmp')
+                os.remove('parsetab.py')
+                os.remove('parser.out')
+                os.remove('parsetab.pyc')
+                os.remove('jsgflexer.pyc')
+            except OSError,e:
+                 sys.stderr.write("Could not delete temporary files. Please do so yourself if you wish.\n") # Colin note: This is a rather unimportant and distracting error message
         except ParseException,e:
             sys.stderr.write(
                 "Error at line %i, wrong token %s\n"%
@@ -143,6 +159,14 @@ if __name__ == "__main__":
             parser.restart()
     else:
         print '''
-pass a file and a start rule as command line arguments and this
-program will print all possible sentences.
+Usage:
+python ./jsgf2prompts.py filename.jsgf commandname
+
+Outputs:
+./prompts.txt ./fileids.txt
+
+NOTE: You may receive warnings such as "WARNING: Token 'TOKENNAME' defined, but not used"...
+
+These are safe to ignore.
+
 '''
