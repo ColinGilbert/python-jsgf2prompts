@@ -1,7 +1,7 @@
 python-jsgf2prompts
 ===================
 
-A very quick and dirty modification to Arne Kohen's work at http://arne-koehn.de/projects/jsgfparser/, for creating prompts files from JSGF grammars. THANK YOU, ARNE! :)
+A very quick and dirty modification to Arne Kohen's work at http://arne-koehn.de/projects/jsgfparser/, for creating prompts files from JSGF grammars.
 
 Depends on Python 2.7 and PLY (tested with version 3.4, but others should work as well.)
 Porting to Python 3.* should be trivial, but I am a very busy man.
