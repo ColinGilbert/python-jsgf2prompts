@@ -20,6 +20,10 @@ Modifications from original:
 
 For use with CMUSPhinx's training, as well as other toolkits which may require it. You'll also need a word dictionary file.
 
+NOTE: Upon running this script, you may receive messages such as "WARNING: Token 'TOKEN_NAME' defined, but not used."
+
+These are safe to ignore. I would have suppressed them, but they belong to the PLY package itself.
+
 ---
 
 Tested under Linux (Gentoo), but should work under any OS which supports Python (AKA: A bucket of sand with a broomhandle stuck in it could run this script...)
