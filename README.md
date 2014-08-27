@@ -14,7 +14,7 @@ Modifications from original:
 
 1 - The original script does not support the characters [] * + and outputs potentially misleading error messages. Added a conditional to prevent this.
 
-2 - Made it write <sil> </sil> at the beginning and end of each sentence.
+2 - Made it write information pertaining the the training toolkit (silence words and file info) at the beginning and end of each sentence.
 
 3 - Made it output to prompts.txt and fileids.txt instead of standard output.
 
